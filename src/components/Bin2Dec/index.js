@@ -6,6 +6,7 @@ import ButtonGroup from '../../UI/ButtonGroup';
 import Button from '../../UI/Button';
 import Text from '../../UI/Text';
 import Title from '../../UI/Title';
+import Alert from '../../UI/Alert';
 
 const ACTIONS = {
     ADD_ZERO: 'add-zero',
@@ -13,6 +14,12 @@ const ACTIONS = {
     CONVERT: 'convert',
     CLEAR: 'clear',
     INPUT: 'input'
+};
+
+const ALERT = {
+    INFO: 'info',
+    ERROR: 'error',
+    CLEAR: 'clear'
 };
 
 function binaryReducer (state, action) {
@@ -24,9 +31,20 @@ function binaryReducer (state, action) {
         case ACTIONS.ADD_ONE:
             return state + '1';
         case ACTIONS.CONVERT:
-            if (state.length > 1 && typeof action.onSetDecimal === 'function') {
-                action.onSetDecimal(bin2dec(state));
+            if (state.length < 1) {
+                action.alertDispatch({ 
+                    type: 'info', 
+                    payload: { message: 'Insert a binary string on input' }
+                });
+
+                return state;
             }
+
+            if (typeof action.onSetDecimal === 'function') {
+                action.onSetDecimal(bin2dec(state));
+                action.alertDispatch({ type: 'clear' });
+            }
+
             return state;
         case ACTIONS.CLEAR:
             if (typeof action.onSetDecimal === 'function') {
@@ -38,9 +56,23 @@ function binaryReducer (state, action) {
     }
 }
 
+function alertReducer (state, action) {
+    switch (action.type) {
+        case ALERT.INFO:
+            return { type: 'info', message: action.payload.message };
+        case ALERT.ERROR:
+            return { type: 'error', message: action.payload.message };
+        case ALERT.CLEAR:
+            return null;
+        default:
+            return state;
+    }
+}
+
 export default function Bin2Dec () {
-    const [decimal, setDecimal] = useState(0);
-    const [binary, dispatch]    = useReducer(binaryReducer, '');
+    const [decimal, setDecimal]  = useState(0);
+    const [binary, dispatch]     = useReducer(binaryReducer, '');
+    const [alert, alertDispatch] = useReducer(alertReducer, null);
 
     return (
         <div className="bin2dec">
@@ -53,6 +85,7 @@ export default function Bin2Dec () {
                         value={binary}
                         placeholder="Type here" 
                         dispatch={dispatch}
+                        alertDispatch={alertDispatch}
                     />
                 </div>
                 <div className="bin2dec-actions bin2dec--div">
@@ -72,7 +105,8 @@ export default function Bin2Dec () {
                             onClick={
                                 () => dispatch({ 
                                     type: 'convert', 
-                                    onSetDecimal: setDecimal 
+                                    onSetDecimal: setDecimal,
+                                    alertDispatch: alertDispatch
                                 })
                             }>
                             Convert
@@ -89,6 +123,11 @@ export default function Bin2Dec () {
                         </Button>
                     </ButtonGroup>
                 </div>
+                {alert && (
+                    <div className="bin2dec--div">
+                        <Alert danger>{alert.message}</Alert>
+                    </div>
+                )}
             </div>
             <div className="bin2dec-foot">
                 <Title level="2">Output</Title>
