@@ -1,0 +1,5 @@
+# blocklsit
+node_modules
+.parcel-cache
+dist
+*.log

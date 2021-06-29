@@ -1,0 +1,22 @@
+{
+  "name": "bin2dec",
+  "version": "0.0.1",
+  "license": "WTFPL",
+  "scripts": {
+    "test": "jest",
+    "start": "parcel serve ./public/index.html"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "jest": "^27.0.6",
+    "parcel": "^2.0.0-beta.3.1",
+    "sass": "^1.35.1"
+  }
+}
