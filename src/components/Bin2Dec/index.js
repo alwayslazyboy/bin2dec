@@ -1,6 +1,5 @@
 import React, { useState, useReducer } from 'react';
 import { bin2dec } from '../../utilities';
-import Box from '../../UI/Box';
 import Textarea from '../../UI/Textarea';
 import ButtonGroup from '../../UI/ButtonGroup';
 import Button from '../../UI/Button';
@@ -16,7 +15,7 @@ const ACTIONS = {
     INPUT: 'input'
 };
 
-const ALERT = {
+const ALERT_ACTIONS = {
     INFO: 'info',
     ERROR: 'error',
     CLEAR: 'clear'
@@ -58,11 +57,17 @@ function binaryReducer (state, action) {
 
 function alertReducer (state, action) {
     switch (action.type) {
-        case ALERT.INFO:
-            return { type: 'info', message: action.payload.message };
-        case ALERT.ERROR:
-            return { type: 'error', message: action.payload.message };
-        case ALERT.CLEAR:
+        case ALERT_ACTIONS.INFO:
+            return { 
+                type: 'info', 
+                message: action.payload.message 
+            };
+        case ALERT_ACTIONS.ERROR:
+            return { 
+                type: 'error', 
+                message: action.payload.message 
+            };
+        case ALERT_ACTIONS.CLEAR:
             return null;
         default:
             return state;
@@ -70,8 +75,8 @@ function alertReducer (state, action) {
 }
 
 export default function Bin2Dec () {
-    const [decimal, setDecimal]  = useState(0);
-    const [binary, dispatch]     = useReducer(binaryReducer, '');
+    const [decimal, setDecimal] = useState(0);
+    const [binary, dispatch] = useReducer(binaryReducer, '');
     const [alert, alertDispatch] = useReducer(alertReducer, null);
 
     return (
@@ -102,8 +107,8 @@ export default function Bin2Dec () {
                         </Button>
                         <Button 
                             primary 
-                            onClick={
-                                () => dispatch({ 
+                            onClick={() => 
+                                dispatch({ 
                                     type: 'convert', 
                                     onSetDecimal: setDecimal,
                                     alertDispatch: alertDispatch
@@ -113,8 +118,8 @@ export default function Bin2Dec () {
                         </Button>
                         <Button 
                             danger 
-                            onClick={
-                                () => dispatch({ 
+                            onClick={() => 
+                                dispatch({ 
                                     type: 'clear', 
                                     onSetDecimal: setDecimal 
                                 })
@@ -131,7 +136,7 @@ export default function Bin2Dec () {
             </div>
             <div className="bin2dec-foot">
                 <Title level="2">Output</Title>
-                <Text>{ decimal }</Text>
+                <Text>{decimal}</Text>
             </div>
         </div>
     );
