@@ -43,39 +43,57 @@ export default function Bin2Dec () {
     const [binary, dispatch]    = useReducer(binaryReducer, '');
 
     return (
-        <Box>
-            <Title level="2">Input</Title>
-            <Textarea
-                value={binary}
-                placeholder="Type here" 
-                dispatch={dispatch}
-            />
-            <ButtonGroup>
-                <Button 
-                    default 
-                    onClick={() => dispatch({ type: 'add-zero' })}>
-                    0
-                </Button>
-                <Button 
-                    default 
-                    onClick={() => dispatch({ type: 'add-one' })}>
-                    1
-                </Button>
-                <Button 
-                    primary 
-                    onClick={() => dispatch({ type: 'convert', onSetDecimal: setDecimal })}>
-                    Convert
-                </Button>
-                <Button 
-                    danger 
-                    onClick={() => dispatch({ type: 'clear', onSetDecimal: setDecimal })}>
-                    Clear
-                </Button>
-            </ButtonGroup>
-            <Title level="2">Output</Title>
-            <Text>
-                { decimal }
-            </Text>
-        </Box>
+        <div className="bin2dec">
+            <div className="bin2dec-head">
+                <Title level="2">Input</Title>
+            </div>
+            <div className="bin2dec-body">
+                <div className="bin2dec-control bin2dec--div">
+                    <Textarea
+                        value={binary}
+                        placeholder="Type here" 
+                        dispatch={dispatch}
+                    />
+                </div>
+                <div className="bin2dec-actions bin2dec--div">
+                    <ButtonGroup>
+                        <Button 
+                            default 
+                            onClick={() => dispatch({ type: 'add-zero' })}>
+                            0
+                        </Button>
+                        <Button 
+                            default 
+                            onClick={() => dispatch({ type: 'add-one' })}>
+                            1
+                        </Button>
+                        <Button 
+                            primary 
+                            onClick={
+                                () => dispatch({ 
+                                    type: 'convert', 
+                                    onSetDecimal: setDecimal 
+                                })
+                            }>
+                            Convert
+                        </Button>
+                        <Button 
+                            danger 
+                            onClick={
+                                () => dispatch({ 
+                                    type: 'clear', 
+                                    onSetDecimal: setDecimal 
+                                })
+                            }>
+                            Clear
+                        </Button>
+                    </ButtonGroup>
+                </div>
+            </div>
+            <div className="bin2dec-foot">
+                <Title level="2">Output</Title>
+                <Text>{ decimal }</Text>
+            </div>
+        </div>
     );
 }
