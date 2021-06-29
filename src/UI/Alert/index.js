@@ -1,13 +1,6 @@
 import React from 'react';
 
-function getColorModifier (props) {
-    if (props.danger) return 'is-danger';
-    return 'is-info';
-}
-
-export default function Alert (props) {
-    const colorModifier = getColorModifier(props);
-    const classes       = `alert ${colorModifier}`;
-
-    return <p className={classes}>{props.children}</p>;
+export default function Alert ({ type, children }) {
+    const classes = `alert ${type ? 'is-' + type : ''}`;
+    return <p className={classes}>{children}</p>;
 }

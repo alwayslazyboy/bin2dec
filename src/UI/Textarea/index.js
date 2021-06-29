@@ -1,17 +1,17 @@
 import React from 'react';
 
-export default function Textarea ({ value, placeholder, dispatch, alertDispatch }) {
+export default function Textarea ({ value, placeholder, dispatch, onSetAlert }) {
     function keyPressHandler (evt) {
         if (! (evt.charCode === 48 || evt.charCode === 49)) {
-            alertDispatch({
-                type: 'error',
-                payload: { message: 'Please, insert only 0 or 1.' }
+            onSetAlert({
+                type: 'danger',
+                message: 'Please, insert 0 or 1.'
             });
 
             return evt.preventDefault();
         }
 
-        alertDispatch({ type: 'clear' });
+        onSetAlert(null);
     }
 
     function changeHandler (evt) {

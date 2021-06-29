@@ -15,12 +15,6 @@ const ACTIONS = {
     INPUT: 'input'
 };
 
-const ALERT_ACTIONS = {
-    INFO: 'info',
-    ERROR: 'error',
-    CLEAR: 'clear'
-};
-
 function binaryReducer (state, action) {
     switch (action.type) {
         case ACTIONS.INPUT:
@@ -31,44 +25,29 @@ function binaryReducer (state, action) {
             return state + '1';
         case ACTIONS.CONVERT:
             if (state.length < 1) {
-                action.alertDispatch({ 
-                    type: 'info', 
-                    payload: { message: 'Insert a binary string on input' }
-                });
-
+                if (typeof action.onSetAlert === 'function') {
+                    action.onSetAlert({
+                        type: 'info',
+                        message: 'Please, insert 0 or 1.'
+                    });
+                }
                 return state;
             }
-
             if (typeof action.onSetDecimal === 'function') {
                 action.onSetDecimal(bin2dec(state));
-                action.alertDispatch({ type: 'clear' });
             }
-
+            if (typeof action.onSetAlert === 'function') {
+                action.onSetAlert(null);
+            }
             return state;
         case ACTIONS.CLEAR:
             if (typeof action.onSetDecimal === 'function') {
                 action.onSetDecimal(0);
             }
+            if (typeof action.onSetAlert === 'function') {
+                action.onSetAlert(null);
+            }
             return '';
-        default:
-            return state;
-    }
-}
-
-function alertReducer (state, action) {
-    switch (action.type) {
-        case ALERT_ACTIONS.INFO:
-            return { 
-                type: 'info', 
-                message: action.payload.message 
-            };
-        case ALERT_ACTIONS.ERROR:
-            return { 
-                type: 'error', 
-                message: action.payload.message 
-            };
-        case ALERT_ACTIONS.CLEAR:
-            return null;
         default:
             return state;
     }
@@ -77,7 +56,7 @@ function alertReducer (state, action) {
 export default function Bin2Dec () {
     const [decimal, setDecimal] = useState(0);
     const [binary, dispatch] = useReducer(binaryReducer, '');
-    const [alert, alertDispatch] = useReducer(alertReducer, null);
+    const [alert, setAlert] = useState(null);
 
     return (
         <div className="bin2dec">
@@ -90,7 +69,7 @@ export default function Bin2Dec () {
                         value={binary}
                         placeholder="Type here" 
                         dispatch={dispatch}
-                        alertDispatch={alertDispatch}
+                        onSetAlert={setAlert}
                     />
                 </div>
                 <div className="bin2dec-actions bin2dec--div">
@@ -111,7 +90,7 @@ export default function Bin2Dec () {
                                 dispatch({ 
                                     type: 'convert', 
                                     onSetDecimal: setDecimal,
-                                    alertDispatch: alertDispatch
+                                    onSetAlert: setAlert
                                 })
                             }>
                             Convert
@@ -121,7 +100,8 @@ export default function Bin2Dec () {
                             onClick={() => 
                                 dispatch({ 
                                     type: 'clear', 
-                                    onSetDecimal: setDecimal 
+                                    onSetDecimal: setDecimal,
+                                    onSetAlert: setAlert
                                 })
                             }>
                             Clear
@@ -130,7 +110,7 @@ export default function Bin2Dec () {
                 </div>
                 {alert && (
                     <div className="bin2dec--div">
-                        <Alert danger>{alert.message}</Alert>
+                        <Alert type={alert.type}>{alert.message}</Alert>
                     </div>
                 )}
             </div>
