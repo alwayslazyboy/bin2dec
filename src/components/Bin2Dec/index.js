@@ -5,6 +5,7 @@ import Textarea from '../../UI/Textarea';
 import ButtonGroup from '../../UI/ButtonGroup';
 import Button from '../../UI/Button';
 import Text from '../../UI/Text';
+import Title from '../../UI/Title';
 
 const ACTIONS = {
     ADD_ZERO: 'add-zero',
@@ -43,6 +44,7 @@ export default function Bin2Dec () {
 
     return (
         <Box>
+            <Title level="2">Input</Title>
             <Textarea
                 value={binary}
                 placeholder="Type here" 
@@ -70,6 +72,7 @@ export default function Bin2Dec () {
                     Clear
                 </Button>
             </ButtonGroup>
+            <Title level="2">Output</Title>
             <Text>
                 { decimal }
             </Text>

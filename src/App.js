@@ -1,23 +1,21 @@
 import React from 'react';
 import Bin2Dec from './components/Bin2Dec';
+import Title from './UI/Title';
+import Subtitle from './UI/Subtitle';
 
 export default function App () {
     return (
         <React.Fragment>
             <div className="app-head">
-                <h1 className="title">
-                    Bin2Dec
-                </h1>
-                <p className="subtitle">
-                    Converts binary to decimal.
-                </p>
+                <Title level="1">Bin2Dec</Title>
+                <Subtitle>Converts binary to decimal</Subtitle>
             </div>
             <div className="app-body">
                 <Bin2Dec />
             </div>
             <div className="app-foot">
                 <p className="credit">
-                    by @alwayslazyboy
+                    By @alwayslazyboy
                 </p>
             </div>
         </React.Fragment>

@@ -1,9 +1,6 @@
 import React from 'react';
 
-export default function Text ({ children }) {
-    return (
-        <p className="text">
-            {children}
-        </p>
-    );
+export default function Text ({className, children }) {
+    const classes = `text ${className || ''}`;
+    return <p className={classes}>{children}</p>;
 }
