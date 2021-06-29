@@ -24,7 +24,7 @@ function binaryReducer (state, action) {
         case ACTIONS.ADD_ONE:
             return state + '1';
         case ACTIONS.CONVERT:
-            if (typeof action.onSetDecimal === 'function') {
+            if (state.length > 1 && typeof action.onSetDecimal === 'function') {
                 action.onSetDecimal(bin2dec(state));
             }
             return state;
