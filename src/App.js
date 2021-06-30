@@ -13,11 +13,6 @@ export default function App () {
             <div className="app-body">
                 <Bin2Dec />
             </div>
-            <div className="app-foot">
-                <p className="credit">
-                    By @alwayslazyboy
-                </p>
-            </div>
         </React.Fragment>
     );
 }
