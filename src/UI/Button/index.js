@@ -2,6 +2,7 @@ import React from 'react';
 
 function getColorModifier (props) {
     if (props.primary) return 'is-primary';
+    if (props.danger) return 'is-danger';
     return 'is-default';
 }
 
