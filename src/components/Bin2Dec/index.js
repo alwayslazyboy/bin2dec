@@ -28,7 +28,7 @@ function binaryReducer (state, action) {
                 if (typeof action.onSetAlert === 'function') {
                     action.onSetAlert({
                         type: 'info',
-                        message: 'Please, insert 0 or 1.'
+                        message: 'Please, enter at least the digits 1 or 0.'
                     });
                 }
                 return state;

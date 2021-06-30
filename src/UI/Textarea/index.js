@@ -5,7 +5,7 @@ export default function Textarea ({ value, placeholder, dispatch, onSetAlert }) 
         if (! (evt.charCode === 48 || evt.charCode === 49)) {
             onSetAlert({
                 type: 'danger',
-                message: 'Please, insert 0 or 1.'
+                message: 'Please, enter only digits 1 or 0.'
             });
 
             return evt.preventDefault();
