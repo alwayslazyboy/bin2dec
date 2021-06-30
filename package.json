@@ -4,7 +4,7 @@
   "license": "WTFPL",
   "scripts": {
     "test": "jest",
-    "start": "parcel serve ./public/index.html"
+    "start": "parcel serve ./src/index.html"
   },
   "dependencies": {
     "react": "^17.0.2",
