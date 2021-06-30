@@ -8,7 +8,7 @@ export default function App () {
         <React.Fragment>
             <div className="app-head">
                 <Title level="1">Bin2Dec</Title>
-                <Subtitle>Converts binary to decimal</Subtitle>
+                <Subtitle>Converts a binary number to decimal.</Subtitle>
             </div>
             <div className="app-body">
                 <Bin2Dec />

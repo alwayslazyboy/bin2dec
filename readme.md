@@ -1,3 +1,3 @@
 ## Bin2Dec
 
-Converts a binary string to a decimal number.
+Converts a binary number to decimal.
