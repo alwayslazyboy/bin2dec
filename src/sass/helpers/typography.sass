@@ -1,0 +1,8 @@
+@use '../utilities' as *
+
+$sizes: ($size-1, $size-2, $size-3, $size-4, $size-5, $size-6, $size-7)
+
+@each $size in $sizes
+    $nth: index($sizes, $size)
+    .is-size-#{$nth}
+        font-size: $size !important

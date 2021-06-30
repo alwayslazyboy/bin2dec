@@ -10,6 +10,8 @@ $-body-line-height: 1.5
 $-body-padding-y: 3rem
 $-body-padding-x: 1.5rem
 
+$-link-color: $info
+
 html
     color: $-base-color
     font-family: $-base-font-family
@@ -27,4 +29,11 @@ body
 
 button,
 textarea
+    font-family: $-base-font-family
     font-size: 1em
+    
+a
+    color: $-link-color
+    text-decoration: none
+    &:hover
+        text-decoration: underline
