@@ -58,13 +58,18 @@ export default function Bin2Dec () {
     const [binary, dispatch] = useReducer(binaryReducer, '');
     const [alert, setAlert] = useState(null);
 
+    const appendClickHandler = (type) => () => {
+        dispatch({ type });
+        setAlert(null);   
+    }
+
     return (
         <div className="bin2dec">
             <div className="bin2dec-head">
                 <Title level="2">Input</Title>
             </div>
             <div className="bin2dec-body">
-                <div className="bin2dec-control bin2dec--div">
+                <div className="bin2dec--div">
                     <Textarea
                         value={binary}
                         placeholder="Type here" 
@@ -72,16 +77,16 @@ export default function Bin2Dec () {
                         onSetAlert={setAlert}
                     />
                 </div>
-                <div className="bin2dec-actions bin2dec--div">
+                <div className="bin2dec--div">
                     <ButtonGroup>
                         <Button 
                             default 
-                            onClick={() => dispatch({ type: 'add-zero' })}>
+                            onClick={appendClickHandler('add-zero')}>
                             0
                         </Button>
                         <Button 
                             default 
-                            onClick={() => dispatch({ type: 'add-one' })}>
+                            onClick={appendClickHandler('add-one')}>
                             1
                         </Button>
                         <Button 
