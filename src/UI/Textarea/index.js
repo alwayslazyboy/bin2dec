@@ -23,6 +23,7 @@ export default function Textarea ({ value, placeholder, dispatch, onSetAlert }) 
 
     return (
         <textarea
+            className="textarea"
             value={value}
             placeholder={placeholder}
             onKeyPress={keyPressHandler}
