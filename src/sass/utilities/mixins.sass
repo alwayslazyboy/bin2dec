@@ -1,5 +1,9 @@
 @use './variables' as *
-    
+
+=mobile
+    @media screen and (max-width: $tablet - 1px)
+        @content
+
 =size($w, $h: $w)
     height: $h
     width: $w

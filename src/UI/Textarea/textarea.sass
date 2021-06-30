@@ -1,0 +1,19 @@
+@use '../../sass/utilities' as *
+
+$-min-height: 200px
+$-border-size: 2px
+$-border-color: $black
+$-size: $size-6
+$-outline-size: 2px
+$-outline-color: lightblue
+
+.textarea
+    border: $-border-size solid $-border-color
+    display: block
+    min-height: $-min-height
+    width: 100%
+    font-size: $-size
+    padding: 0.75rem
+    &:focus
+        outline: none
+        box-shadow: 0 0 0 $-outline-size $-outline-color

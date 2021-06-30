@@ -1,6 +1,20 @@
 @use './sass/utilities' as *
 
 #app
+    display: flex
+    flex-direction: column
     flex: 1
     margin: auto
     max-width: 500px
+    width: 100%
+    
+.app
+    &-head,
+    &-foot
+        flex: none
+    &-body
+        flex: 1
+        padding: 3rem 0
+    /* credits */
+    &-foot > .credit
+        font-size: $size-7

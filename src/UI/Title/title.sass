@@ -1,0 +1,14 @@
+@use '../../sass/utilities' as *
+
+$-size: $size-3
+$-weight: $weight-bold
+$-line-height: 1.25
+
+.title
+    font-size: $-size
+    font-weight: $-weight
+    list-height: $-line-height
+    &:not(:last-child)
+        margin-bottom: 1.25rem
+    &:not(.is-spaced) + .subtitle
+        margin-top: -1.25rem

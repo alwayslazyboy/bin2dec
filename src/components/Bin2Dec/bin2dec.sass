@@ -1,2 +1,25 @@
 @use '../../sass/utilities' as *
 
+.bin2dec
+    display: flex
+    flex-direction: column
+    &-head,
+    &-foot
+        flex: none
+    &-body
+        flex: 1
+        padding: 1.25rem 0
+    &--div:not(:last-child)
+        margin-bottom: 1.25rem
+    /* Title */
+    .title
+        color: grey
+        font-size: $size-5
+    /* Output */
+    &-foot > p
+        font-size: $size-3
+        line-height: 1
+    .button-group .button
+        +mobile
+            flex: none
+            width: calc(50% - 15px)
