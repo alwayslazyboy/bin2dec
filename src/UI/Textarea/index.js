@@ -2,7 +2,8 @@ import React from 'react';
 
 export default function Textarea ({ value, placeholder, dispatch, onSetAlert }) {
     function keyPressHandler (evt) {
-        if (! (evt.charCode === 48 || evt.charCode === 49)) {
+        console.log(evt.charCode)
+        if ([48, 49].includes(evt.charCode) === false) {
             onSetAlert({
                 type: 'danger',
                 message: 'Please, enter only digits 1 or 0.'
